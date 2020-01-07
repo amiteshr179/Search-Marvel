@@ -1,4 +1,5 @@
 import React from 'react';
+import Checkbox from '@material-ui/core/Checkbox';
 
 import { messageService } from '@/_services';
 
@@ -15,11 +16,7 @@ class HomePage extends React.Component {
 
     render() {
         return (
-            // <div>
-            //     <h2>React + RxJS Component Communication</h2>
-            //     <button onClick={this.sendMessage} className="btn btn-primary">Send Message</button>
-            //     <button onClick={this.clearMessages} className="btn btn-secondary">Clear Messages</button>                
-            // </div>
+            <div>
             <section className="login">
             {/* <h4 className="center-align">Login Form</h4> */}
             <div className="card">
@@ -42,10 +39,75 @@ class HomePage extends React.Component {
 
               </div>
               <div className="card-action right-align">
-              <a className="waves-effect waves-light btn">Login</a>
+              <a className="user-login waves-effect waves-light btn">Login</a>
               </div>
             </div>
             </section>
+            <section className="card dashboard">
+                    <table className="responsive-table striped">
+                <thead>
+                <tr>
+                    <th>Component</th>
+                    <th>Current Deployed State</th>
+                    <th>Release Nos after last Deployment</th>
+                    <th>Desired Deployment State</th>
+                    <th>Commit ID</th>
+                    <th>Jira Detail</th>
+                    <th>Deploy</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td>CS Email Service</td>
+                    <td>release-1244</td>
+                    <td>
+                        <ul>
+                            <li>release-1245</li>
+                            <li>release-1246</li>
+                            <li>release-1247</li>
+                            <li>release-1248</li>
+                            <li>release-1249</li>
+                        </ul>
+                    </td>
+                    <td>release-1249</td>
+                    <td>4846da19975faa67fbde65e3ca0dfdc7daff6e8f</td>
+                    <td>BOL-3381</td>
+                    <td>
+                    <Checkbox
+                        defaultChecked
+                        value="secondary"
+                        color="primary"
+                        inputProps={{ 'aria-label': 'secondary checkbox' }}
+                    />
+                    </td>
+                </tr>
+                <tr>
+                    <td>CS UI</td>
+                    <td>release-1284</td>
+                    <td>
+                        <ul>
+                            <li>release-1285</li>
+                            <li>release-1286</li>
+                            <li>release-1287</li>
+                            <li>release-1288</li>
+                        </ul>
+                    </td>
+                    <td>release-1288</td>
+                    <td>ce2c71b40b82499f92b9661e87e35a2318d84ec6</td>
+                    <td>BOL-3392</td>
+                    <td>
+                    <Checkbox
+                        value="secondary"
+                        color="primary"
+                        inputProps={{ 'aria-label': 'secondary checkbox' }}
+                    />
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            </section>
+            </div>
         );
     }
 }
