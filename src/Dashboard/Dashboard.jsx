@@ -33,18 +33,16 @@ class Dashboard extends React.Component {
                 <tbody>
                 <tr>
                     <td>CS Email Service</td>
-                    <td>release-1244</td>
+                    <td>release-1246</td>
                     <td>
                         <ul>
-                            <li>release-1245</li>
                             <li>release-1246</li>
                             <li>release-1247</li>
                             <li>release-1248</li>
-                            <li>release-1249</li>
                         </ul>
                     </td>
-                    <td>release-1249</td>
-                    <td>4846da19975faa67fbde65e3ca0dfdc7daff6e8f</td>
+                    <td>release-1248</td>
+                    <td className="commit-id">4846da19975faa67fbde65e3ca0dfdc7daff6e8f</td>
                     <td>BOL-3381</td>
                     <td>
                     <Checkbox
@@ -57,17 +55,15 @@ class Dashboard extends React.Component {
                 </tr>
                 <tr>
                     <td>CS UI</td>
-                    <td>release-1284</td>
+                    <td>release-1486</td>
                     <td>
                         <ul>
-                            <li>release-1285</li>
-                            <li>release-1286</li>
-                            <li>release-1287</li>
-                            <li>release-1288</li>
+                            <li>release-1487</li>
+                            <li>release-1488</li>
                         </ul>
                     </td>
-                    <td>release-1288</td>
-                    <td>ce2c71b40b82499f92b9661e87e35a2318d84ec6</td>
+                    <td>release-1488</td>
+                    <td className="commit-id">ce2c71b40b82499f92b9661e87e35a2318d84ec6</td>
                     <td>BOL-3392</td>
                     <td>
                     <Checkbox
@@ -79,6 +75,9 @@ class Dashboard extends React.Component {
                 </tr>
                 </tbody>
             </table>
+            <div className="card-action right-align">
+              <a className="user-login waves-effect waves-light btn" href="dashboard"><b>Deploy</b></a>
+              </div>
             </section>
             </div>
         );
