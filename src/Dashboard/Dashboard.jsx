@@ -1,19 +1,47 @@
 import React from 'react';
 import Checkbox from '@material-ui/core/Checkbox';
+import {messageService} from "../_services";
+import Select from "@material-ui/core/Select";
 
 class Dashboard extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {value: 'ChooseYourEnvironment'};
+    }
+    componentDidMount() {
+
+        this.subscription = messageService.getMessage().subscribe(result => {
+            if (result) {
+                // add message to local state if not empty
+                this.setState({result: result});
+            } else {
+                // clear messages when empty message received
+                this.setState({result: ''});
+            }
+        });
+    }
+
+    componentWillUnmount() {
+        // unsubscribe to ensure no memory leaks
+        this.subscription.unsubscribe();
+    }
+
+    handleChange(event) {
+        this.setState({value: event.target.value});
+    }
+
+
     render() {
         return (
             <div className="dashboard">
                 <h4 className="center-align"><b>One Click Deployment</b></h4>
                 <div className='row'>
-                <div className="select-env input-field col s4">
-                    <select>
-                    <option value="" selected>Choose your Environment</option>
-                    <option value="1">QA</option>
-                    <option value="2">Production</option>
-                    </select>
-                    <label>Environment</label>
+                    <div className="select-env input-field col s4">
+                    <Select value={this.state.value} onChange={this.handleChange.bind(this)}>
+                    <option value="ChooseYourEnvironment" selected>Choose your Environment</option>
+                    <option value="QA">QA</option>
+                    <option value="Production">Production</option>
+                    </Select>
                 </div>
                 </div>
             <section className=" card">

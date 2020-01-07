@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { messageService } from '@/_services';
 import { HomePage } from '@/HomePage';
 import {Dashboard} from '@/Dashboard';
+import {Loader} from "../Loader/Loader";
 
 class App extends React.Component {
     constructor(props) {
@@ -46,6 +47,7 @@ class App extends React.Component {
                                     )}
                                     <Route exact path="/" component={HomePage} />
                                     <Route exact path="/dashboard" component={Dashboard} />
+                                    <Route exact path={"/loader"} component={Loader} />
                                 </div>
                             </div>
                         </div>
