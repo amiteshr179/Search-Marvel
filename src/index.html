@@ -16,13 +16,20 @@
 
 
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
-
+    <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('select');
+            var instances = M.FormSelect.init(elems);
+        });
+  </script>
 
     <style>
         a { cursor: pointer; }
         .login{
             width: 425px;
             margin: 0 auto;
+        }
+        .center-section{
             position: absolute;
             top: 40%;
             left: 50%;
@@ -30,6 +37,9 @@
         }
         table.striped tr{
             border-bottom: 1px solid rgba(0,0,0,0.12);
+        }
+        .dashboard{
+            margin-top:75px;
         }
         .dashboard td, .dashboard th{
             justify-content: center;

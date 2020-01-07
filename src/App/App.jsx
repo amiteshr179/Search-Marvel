@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import { messageService } from '@/_services';
 import { HomePage } from '@/HomePage';
+import {Dashboard} from '@/Dashboard';
 
 class App extends React.Component {
     constructor(props) {
@@ -44,6 +45,7 @@ class App extends React.Component {
                                         <div key={index} className="alert alert-success">{message.text}</div>
                                     )}
                                     <Route exact path="/" component={HomePage} />
+                                    <Route exact path="/dashboard" component={Dashboard} />
                                 </div>
                             </div>
                         </div>
