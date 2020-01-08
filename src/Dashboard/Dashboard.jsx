@@ -2,6 +2,8 @@ import React from 'react';
 import Checkbox from '@material-ui/core/Checkbox';
 import {messageService} from "../_services";
 import Select from "@material-ui/core/Select";
+import async from 'async';
+import axios from 'axios';
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -36,7 +38,20 @@ class Dashboard extends React.Component {
     handleCheck(name,event){
         this.setState({ [name]: event.target.checked });
     }
-
+    deployChange(){
+        async.parallel([
+            function(callback) {
+                axios.get(`https://jsonplaceholder.typicode.com/todos/1`).then(res => callback(res));
+            },
+            function(callback) {
+                axios.get(`https://jsonplaceholder.typicode.com/todos/1`).then(res => callback(res));
+            }
+        ], function(err, results) {
+            // after all the api calls are finished
+            const bitcoinRes = results[0];
+            const ethereumRes = results[1];
+        });
+    }
 
     render() {
         var checkboxStyle = {
@@ -110,7 +125,7 @@ class Dashboard extends React.Component {
                 </tbody>
             </table>
             <div className="card-action right-align">
-              <a className="user-login waves-effect waves-light btn" href="dashboard"><b>Deploy</b></a>
+              <a className="user-login waves-effect waves-light btn" onClick={this.deployChange.bind(this)}><b>Deploy</b></a>
               </div>
             </section>
             </div>

@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@material-ui/core": "^4.8.3",
+    "async": "^3.1.0",
     "axios": "^0.19.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
