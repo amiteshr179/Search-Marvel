@@ -37,12 +37,11 @@ class HomePage extends React.Component {
                         <input id="icon_telephone" type="password" className="validate" name="password" value={this.state.password} onChange={e => this.handleChange(e)}/>
                         <label htmlFor="icon_telephone">Password</label>
                     </div>
+                    <div className="input-field">
+                    <Link className="user-login waves-effect waves-light btn" to={{pathname:'/loader',aboutProps:{username:this.state.name, password:this.state.password}}}><b>Submit</b></Link>
+                    </div>
                 </form>
             </div>
-
-              </div>
-              <div className="card-action right-align">
-                  <Link className="user-login waves-effect waves-light btn" to={{pathname:'/loader',aboutProps:{username:this.state.name, password:this.state.password}}}>Login</Link>
               </div>
             </div>
             </section>

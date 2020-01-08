@@ -39,12 +39,15 @@ class Dashboard extends React.Component {
         this.setState({ [name]: event.target.checked });
     }
     deployChange(){
+        //pass all the component names here
         async.parallel([
             function(callback) {
                 axios.get(`https://jsonplaceholder.typicode.com/todos/1`).then(res => callback(res));
+                //use post for actual calls
             },
             function(callback) {
                 axios.get(`https://jsonplaceholder.typicode.com/todos/1`).then(res => callback(res));
+                //use post for actual calls
             }
         ], function(err, results) {
             // after all the api calls are finished
@@ -125,7 +128,7 @@ class Dashboard extends React.Component {
                 </tbody>
             </table>
             <div className="card-action right-align">
-              <a className="user-login waves-effect waves-light btn" onClick={this.deployChange.bind(this)}><b>Deploy</b></a>
+              <a className="waves-effect waves-light btn" onClick={this.deployChange.bind(this)}><b>Deploy</b></a>
               </div>
             </section>
             </div>
