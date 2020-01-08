@@ -6,10 +6,14 @@ import Select from "@material-ui/core/Select";
 class Dashboard extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {value: 'ChooseYourEnvironment'};
-    }
-    componentDidMount() {
+        this.state = {value: 'ChooseYourEnvironment',
+            checkedA: false,
+            checkedB: false,
+        };
 
+    }
+
+    componentDidMount() {
         this.subscription = messageService.getMessage().subscribe(result => {
             if (result) {
                 // add message to local state if not empty
@@ -29,9 +33,16 @@ class Dashboard extends React.Component {
     handleChange(event) {
         this.setState({value: event.target.value});
     }
+    handleCheck(name,event){
+        this.setState({ [name]: event.target.checked });
+    }
 
 
     render() {
+        var checkboxStyle = {
+            opacity:"inherit",
+            pointerEvents:"all"
+        }
         return (
             <div className="dashboard">
                 <h4 className="center-align"><b>One Click Deployment</b></h4>
@@ -73,11 +84,8 @@ class Dashboard extends React.Component {
                     <td className="commit-id">4846da19975faa67fbde65e3ca0dfdc7daff6e8f</td>
                     <td>BOL-3381</td>
                     <td>
-                    <Checkbox
-                        defaultChecked
-                        value="secondary"
-                        color="primary"
-                        inputProps={{ 'aria-label': 'secondary checkbox' }}
+                    <input type="checkbox" name="checkedA" style={checkboxStyle}
+                        checked={this.state.checkedA} onChange={e => this.handleCheck('checkedA',e).bind(this)} value="checkedA"
                     />
                     </td>
                 </tr>
@@ -94,10 +102,8 @@ class Dashboard extends React.Component {
                     <td className="commit-id">ce2c71b40b82499f92b9661e87e35a2318d84ec6</td>
                     <td>BOL-3392</td>
                     <td>
-                    <Checkbox
-                        value="secondary"
-                        color="primary"
-                        inputProps={{ 'aria-label': 'secondary checkbox' }}
+                    <input type="checkbox" name="checkedB" style={checkboxStyle}
+                        checked={this.state.checkedB} onChange={e => this.handleCheck('checkedB',e).bind(this)} value="checkedB"
                     />
                     </td>
                 </tr>
