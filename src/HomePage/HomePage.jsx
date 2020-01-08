@@ -1,7 +1,22 @@
 import React from 'react';
-import { Loader } from '../Loader/Loader'
+import { Loader } from '../Loader/Loader';
+import {Link} from "react-router-dom";
 
 class HomePage extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: '',
+            password: ''
+        };
+    }
+
+    handleChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    };
+
     render() {
         return (
             <div>
@@ -14,12 +29,12 @@ class HomePage extends React.Component {
                 <form className="col s12">
                     <div className="input-field">
                         <i className="material-icons prefix">account_circle</i>
-                        <input id="icon_prefix" type="text" className="validate" />
+                        <input id="icon_prefix" type="text" className="validate" name="name" value={this.state.name} onChange={e => this.handleChange(e)}/>
                         <label htmlFor="icon_prefix">User Name</label>
                     </div>
                     <div className="input-field">
                         <i className="material-icons prefix">lock_outline</i>
-                        <input id="icon_telephone" type="tel" className="validate" />
+                        <input id="icon_telephone" type="password" className="validate" name="password" value={this.state.password} onChange={e => this.handleChange(e)}/>
                         <label htmlFor="icon_telephone">Password</label>
                     </div>
                 </form>
@@ -27,7 +42,7 @@ class HomePage extends React.Component {
 
               </div>
               <div className="card-action right-align">
-                  <a className="user-login waves-effect waves-light btn" href="loader">Login</a>
+                  <Link className="user-login waves-effect waves-light btn" to={{pathname:'/loader',aboutProps:{username:this.state.name, password:this.state.password}}}>Login</Link>
               </div>
             </div>
             </section>
