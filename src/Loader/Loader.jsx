@@ -14,7 +14,7 @@ class Loader extends React.Component{
     componentDidMount() {
         fetch('https://jsonplaceholder.typicode.com/todos/1')
 
-        // axios.post('https://jsonplaceholder.typicode.com/todos/1',{username:"ramayana", password:""})
+        // axios.post('https://jsonplaceholder.typicode.com/todos/1',{username:this.props.location.aboutProps.name, password:this.props.location.aboutProps.password})
             .then(response => response.json())
             .then(json => {
                 if (json){
@@ -28,7 +28,20 @@ class Loader extends React.Component{
 
         return(
             <div>
-            {this.state.isLoaded ? <section>waiting</section> : <Dashboard /> }
+            {this.state.isLoaded ? 
+                <section>
+                    <div className="preloader-wrapper big active">
+                        <div className="spinner-layer spinner-blue-only">
+                        <div className="circle-clipper left">
+                            <div className="circle"></div>
+                        </div><div className="gap-patch">
+                            <div className="circle"></div>
+                        </div><div className="circle-clipper right">
+                            <div className="circle"></div>
+                        </div>
+                        </div>
+                    </div>
+                </section> : <Dashboard /> }
             </div>
         );
     }

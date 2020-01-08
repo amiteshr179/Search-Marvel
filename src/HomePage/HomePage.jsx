@@ -19,12 +19,12 @@ class HomePage extends React.Component {
 
     render() {
         return (
-            <div>
+            <div class="login-section">
             <section className="center-section login">
-            {/* <h4 className="center-align">Login Form</h4> */}
+            
             <div className="card">
               <div className="card-content">
-
+              <h5 className="center-align"><b>Sign In</b></h5>
               <div className="row">
                 <form className="col s12">
                     <div className="input-field">
