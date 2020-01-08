@@ -44,7 +44,7 @@ class Dashboard extends React.Component {
             pointerEvents:"all"
         }
         return (
-            <div className="dashboard">
+            <div className="container dashboard">
                 <h4 className="center-align"><b>One Click Deployment</b></h4>
                 <div className='row'>
                     <div className="select-env input-field col s4">

@@ -37,21 +37,13 @@ class App extends React.Component {
         const { messages } = this.state;
         return (
             <Router>
-                <div>
-                    <div className="jumbotron">
-                        <div className="container text-center">
-                            <div className="row">
-                                <div className="col-sm-8 offset-sm-2">
+                <div className="main">
                                     {messages.map((message, index) =>
                                         <div key={index} className="alert alert-success">{message.text}</div>
                                     )}
                                     <Route exact path="/" component={HomePage} />
                                     <Route exact path="/dashboard" component={Dashboard} />
                                     <Route exact path={"/loader"} component={Loader} />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </Router>
         );

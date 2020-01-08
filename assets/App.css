@@ -1,0 +1,57 @@
+html, body, #app, .main{
+    height: 100%;
+}
+a { 
+    cursor: pointer; 
+}
+.login-section{
+    background: url('/assets/Header_BG.png') no-repeat;
+    width: 100%;
+    height:100%;
+    background-size: cover;
+}
+.login-section .card{
+    border-radius: 0px;
+}
+.card{
+
+}
+.login{
+    width: 450px;
+    margin: 0 auto;
+}
+.login-right{
+    background: #fff;
+}
+.center-section, .preloader-wrapper{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+}
+table.striped tr{
+    border-bottom: 1px solid rgba(0,0,0,0.12);
+}
+.dashboard{
+    margin-top:75px;
+}
+.dashboard td, .dashboard th{
+    justify-content: center;
+    text-align: center;
+    padding:15px 10px;
+    border-radius: 0px;
+    max-width: 150px;
+}
+.commit-id{
+    word-break: break-all;
+}
+.dashboard thead{
+    background-color: #3498db;
+    color: #fff;
+}
+.user-login, .user-login.btn:hover {
+    background-color: #3498db;
+}
+input:focus{
+    box-shadow: none !important;
+}
