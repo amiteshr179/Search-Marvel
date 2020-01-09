@@ -12,15 +12,13 @@ class Loader extends React.Component{
     }
 
     componentDidMount() {
-        fetch('https://jsonplaceholder.typicode.com/todos/1')
+        //fetch('https://jsonplaceholder.typicode.com/todos/1')
 
-        // axios.post('https://jsonplaceholder.typicode.com/todos/1',{username:this.props.location.aboutProps.name, password:this.props.location.aboutProps.password})
-            .then(response => response.json())
-            .then(json => {
-                if (json){
+        axios.post('http://localhost:5001/api/utility/release/ReleaseDetails',{username:this.props.location.aboutProps.username, password:this.props.location.aboutProps.password})
+            .then(response => {
+            console.log(response);
                 this.setState({isLoaded: false});
-                messageService.sendMessage({isLoaded: true,items: result.items});
-            }
+                messageService.sendMessage(response.data);
             })
     }
     render() {
