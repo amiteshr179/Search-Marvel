@@ -5,12 +5,55 @@ import Select from "@material-ui/core/Select";
 import async from 'async';
 import axios from 'axios';
 
+var checkboxStyle = {
+    opacity:"inherit",
+    pointerEvents:"all"
+};
+
+
+const CheckDeploy = ()=>{
+    var checkArr = this.state.checkComponents.map(function (item) {
+        return (
+            <input type="checkbox" name={item.name} style={checkboxStyle}
+                   checked={item.status} onChange={e => this.handleCheck(item.name,e).bind(this)} value={item.name}
+            />
+        )
+    });
+return(
+    {checkArr}
+)
+};
+
+const JiraDetail = (jiraArr)=>{
+    var jiraDetail = jiraArr.map(function (jiraDetail) {
+        return (
+            <td className="commit-id">{jiraDetail.properties}</td>
+        );
+    });
+    return (
+        {jiraDetail}
+    )
+};
+
+
+const CommitData = (commitArr) => {
+    var dataItems = commitArr.map(function (commitId) {
+        return (
+            <td className="commit-id">{commitId}</td>
+        );
+    });
+
+    return (
+        {dataItems}
+    );
+};
+
 class Dashboard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {value: 'ChooseYourEnvironment',
-            checkedA: false,
-            checkedB: false,
+            checkComponents: [{name:"checkedA", status:false},{name:"checkedB", status: false},{name:"checkedC", status:false},{name:"checkedD",status:false}],
+            components:[]
         };
 
     }
@@ -19,10 +62,10 @@ class Dashboard extends React.Component {
         this.subscription = messageService.getMessage().subscribe(result => {
             if (result) {
                 // add message to local state if not empty
-                this.setState({result: result});
+                this.setState({components: result.releaseOutputModels});
             } else {
                 // clear messages when empty message received
-                this.setState({result: ''});
+                this.setState({components: []});
             }
         });
     }
@@ -31,12 +74,15 @@ class Dashboard extends React.Component {
         // unsubscribe to ensure no memory leaks
         this.subscription.unsubscribe();
     }
-
     handleChange(event) {
         this.setState({value: event.target.value});
     }
     handleCheck(name,event){
-        this.setState({ [name]: event.target.checked });
+        for(let i=0;i<= this.state.checkComponents;i++){
+            if(name === this.state.checkComponents[i].name){
+                this.setState({ [name]: event.target.checked });
+            }
+        }
     }
     deployChange(){
         //pass all the component names here
@@ -57,10 +103,28 @@ class Dashboard extends React.Component {
     }
 
     render() {
-        var checkboxStyle = {
-            opacity:"inherit",
-            pointerEvents:"all"
-        }
+
+        var listItems = this.state.components.map(function(component) {
+            return (
+                <tr>
+                    <td>{component.componentName}</td>
+                    <td>{component.prodDeployedState}</td>
+                    <td>
+                        <ul>
+                            <li>release-1246</li>
+                            <li>release-1247</li>
+                            <li>release-1248</li>
+                        </ul>
+                    </td>
+                    <td>{component.preProdDeploymentState}</td>
+                    <CommitData  commitArr={component.commitIds}/>
+                    <JiraDetail jiraArr={component.jiraDetails}/>
+                    <td>
+                     <CheckDeploy/>
+                    </td>
+                </tr>
+            );
+        });
         return (
             <div className="container dashboard">
                 <h4 className="center-align"><b>One Click Deployment</b></h4>
@@ -88,43 +152,7 @@ class Dashboard extends React.Component {
                 </thead>
 
                 <tbody>
-                <tr>
-                    <td>CS Email Service</td>
-                    <td>release-1246</td>
-                    <td>
-                        <ul>
-                            <li>release-1246</li>
-                            <li>release-1247</li>
-                            <li>release-1248</li>
-                        </ul>
-                    </td>
-                    <td>release-1248</td>
-                    <td className="commit-id">4846da19975faa67fbde65e3ca0dfdc7daff6e8f</td>
-                    <td>BOL-3381</td>
-                    <td>
-                    <input type="checkbox" name="checkedA" style={checkboxStyle}
-                        checked={this.state.checkedA} onChange={e => this.handleCheck('checkedA',e).bind(this)} value="checkedA"
-                    />
-                    </td>
-                </tr>
-                <tr>
-                    <td>CS UI</td>
-                    <td>release-1486</td>
-                    <td>
-                        <ul>
-                            <li>release-1487</li>
-                            <li>release-1488</li>
-                        </ul>
-                    </td>
-                    <td>release-1488</td>
-                    <td className="commit-id">ce2c71b40b82499f92b9661e87e35a2318d84ec6</td>
-                    <td>BOL-3392</td>
-                    <td>
-                    <input type="checkbox" name="checkedB" style={checkboxStyle}
-                        checked={this.state.checkedB} onChange={e => this.handleCheck('checkedB',e).bind(this)} value="checkedB"
-                    />
-                    </td>
-                </tr>
+                {listItems}
                 </tbody>
             </table>
             <div className="card-action right-align">

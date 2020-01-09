@@ -14,7 +14,7 @@ class Loader extends React.Component{
     componentDidMount() {
         fetch('https://jsonplaceholder.typicode.com/todos/1')
 
-        // axios.post('https://jsonplaceholder.typicode.com/todos/1',{username:this.props.location.aboutProps.name, password:this.props.location.aboutProps.password})
+        // axios.post('http://localhost:5001/api/utility/release/ReleaseDetails',{username:this.props.location.aboutProps.name, password:this.props.location.aboutProps.password})
             .then(response => response.json())
             .then(json => {
                 if (json){
