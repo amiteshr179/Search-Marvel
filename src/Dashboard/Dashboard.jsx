@@ -53,7 +53,7 @@ class Dashboard extends React.Component {
         super(props);
         this.state = {value: 'ChooseYourEnvironment',
             checkComponents: [{name:"checkedA", status:false},{name:"checkedB", status: false},{name:"checkedC", status:false},{name:"checkedD",status:false}],
-            components:[releaseOutputModels:[]]
+            components:[{"releaseOutputModels":[]}]
         };
 
     }
@@ -73,9 +73,6 @@ class Dashboard extends React.Component {
     componentWillUnmount() {
         // unsubscribe to ensure no memory leaks
         this.subscription.unsubscribe();
-    }
-    handleChange(event) {
-        this.setState({value: event.target.value});
     }
     handleCheck(name,event){
         for(let i=0;i<= this.state.checkComponents;i++){
@@ -104,7 +101,7 @@ class Dashboard extends React.Component {
 
     render() {
 
-        var listItems = this.state.components.releaseOutputModels.map(function(component) {
+        var listItems = this.state.components[0].releaseOutputModels.map(function(component) {
             return (
                 <tr>
                     <td>{component.componentName}</td>
@@ -126,17 +123,17 @@ class Dashboard extends React.Component {
             );
         });
         return (
-            <div className="container dashboard">
-                <h4 className="center-align"><b>One Click Deployment</b></h4>
-                <div className='row'>
-                    <div className="select-env input-field col s4">
-                    <Select value={this.state.value} onChange={this.handleChange.bind(this)}>
-                    <option value="ChooseYourEnvironment" selected>Choose your Environment</option>
-                    <option value="QA">QA</option>
-                    <option value="Production">Production</option>
-                    </Select>
-                </div>
-                </div>
+            // <div className="container dashboard">
+            //     <h4 className="center-align"><b>One Click Deployment</b></h4>
+            //     <div className='row'>
+            //         <div className="select-env input-field col s4">
+            //         <Select value={this.state.value} onChange={this.handleChange.bind(this)}>
+            //         <option value="ChooseYourEnvironment" selected>Choose your Environment</option>
+            //         <option value="QA">QA</option>
+            //         <option value="Production">Production</option>
+            //         </Select>
+            //     </div>
+            //     </div>
             <section className=" card">
                     <table className="responsive-table striped">
                 <thead>
