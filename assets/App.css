@@ -52,6 +52,7 @@ table.striped tr{
 }
 .btn{
     background-color: #3498db;
+    cursor: pointer;
 }
 .user-login, .user-login.btn:hover {
     width: 100%;
@@ -84,4 +85,17 @@ input:focus{
     width: auto !important;
     background: #fff;
     padding: 0 5px;
+
+}
+.more-actions {
+    margin-top: 50px;
+}
+.more-actions h5, .more-actions .row{
+    margin: 0;
+}
+.more-actions .right-align{
+    padding-right: 0;
+}
+.more-actions .inte-btn{
+    margin-right: 30px;
 }
