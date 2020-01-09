@@ -33,24 +33,28 @@ class Dashboard extends React.Component {
         this.subscription.unsubscribe();
     }
 
-    deployChange(){
+    deployChange() {
         //pass all the component names here
         console.log(this.state);
-        async.parallel([
-            function(callback) {
-                axios.get(`https://jsonplaceholder.typicode.com/todos/1`).then(res => callback(res));
-                //use post for actual calls
-            },
-            function(callback) {
-                axios.get(`https://jsonplaceholder.typicode.com/todos/1`).then(res => callback(res));
-                //use post for actual calls
+        var reqArr = [];
+        for (let i = 0; i < this.state.releaseOutputModels.releaseOutputModels.length; i++) {
+            if (this.state.releaseOutputModels.releaseOutputModels[i].isChecked === true) {
+                reqArr.push({
+                    projectId: this.state.releaseOutputModels.releaseOutputModels[i].projectId,
+                    environmentId: this.state.releaseOutputModels.releaseOutputModels[i].deploymentOutputs.preProdDeplymentId,
+                    preProdDeploymentState: this.state.releaseOutputModels.releaseOutputModels[i].deploymentOutputs.preProdDeploymentState,
+                    preProdPlanResultKey: this.state.releaseOutputModels.releaseOutputModels[i].deploymentOutputs.preProdPlanResultKey,
+                    loginDetails: {
+                        userName: this.props.credentials.username,
+                        password: this.props.credentials.password
+                    }
+                })
             }
-        ], function(err, results) {
-            // after all the api calls are finished
-            const bitcoinRes = results[0];
-            const ethereumRes = results[1];
-        });
-    }
+        }
+
+        axios.post('http://localhost:5001/api/utility/release/StartDeployment', reqArr)
+            .then(response => console.log(response));
+        }
 
     render() {
 

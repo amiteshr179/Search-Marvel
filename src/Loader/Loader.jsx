@@ -70,7 +70,7 @@ class Loader extends React.Component{
 </div>
 </div>
 </div>
-</section> : <Dashboard /> }
+</section> : <Dashboard credentials={{"username":this.props.location.aboutProps.username, "password":this.props.location.aboutProps.password}}/> }
             </div>
         );
     }
