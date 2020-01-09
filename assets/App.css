@@ -96,3 +96,23 @@ input:focus{
 .more-actions .inte-btn{
     margin-right: 30px;
 }
+
+/*Styles for borders in table */
+table.deploy-dash ul, table.deploy-dash td{
+    padding:0px;
+    margin: 0 2.5px;
+}
+table.deploy-dash td{
+    border-right: 1px solid #ccc;
+    line-height: 30px;
+}
+table.deploy-dash tr td:last-child{
+    border-right: 0;
+}
+table.deploy-dash td input[type="checkbox"]{
+    position: relative;
+    line-height: 30px;
+}
+table.deploy-dash ul li:not(:nth-child(1)){
+    /*border-top: 1px solid #ccc;*/
+}
