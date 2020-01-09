@@ -5,55 +5,68 @@ import Select from "@material-ui/core/Select";
 import async from 'async';
 import axios from 'axios';
 
-var checkboxStyle = {
-    opacity:"inherit",
-    pointerEvents:"all"
-};
 
 
-const CheckDeploy = ()=>{
-    var checkArr = this.state.checkComponents.map(function (item) {
-        return (
-            <input type="checkbox" name={item.name} style={checkboxStyle}
-                   checked={item.status} onChange={e => this.handleCheck(item.name,e).bind(this)} value={item.name}
-            />
-        )
-    });
-return(
-    {checkArr}
-)
-};
+class CheckDeploy extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {checkComponents: [
+            {name:"checkedA", status:false},
+                {name:"checkedB", status: false},
+                {name:"checkedC", status:false},
+                {name:"checkedD",status:false}]};
 
-const JiraDetail = (jiraArr)=>{
-    var jiraDetail = jiraArr.map(function (jiraDetail) {
-        return (
-            <td className="commit-id">{jiraDetail.properties}</td>
-        );
-    });
-    return (
-        {jiraDetail}
-    )
-};
+    }
+    handleCheck(name,event){
+        for(let i=0;i<= this.state.checkComponents;i++){
+            if(name === this.state.checkComponents[i].name){
+                this.setState({ [name]: event.target.checked });
+            }
+        }
+    }
+    render() {
+        var checkboxStyle = {
+            opacity:"inherit",
+            pointerEvents:"all"
+        };
+        var checkComponents = this.state.checkComponents.map(item => <input type="checkbox" name={item.name} style={checkboxStyle} checked={item.status} onChange={e => this.handleCheck(item.name,e).bind(this)} value={item.name}/>);
 
+         return(
+             {checkComponents}
+         )
 
-const CommitData = (commitArr) => {
-    var dataItems = commitArr.map(function (commitId) {
-        return (
-            <td className="commit-id">{commitId}</td>
-        );
-    });
+    }
+}
 
-    return (
-        {dataItems}
-    );
-};
+// const JiraDetail = (props)=>{
+//     var jiraDetail = props.jiraArr.map(function (jiraDetail) {
+//         return (
+//             <td className="commit-id">{jiraDetail.properties}</td>
+//         );
+//     });
+//     return (
+//         {jiraDetail}
+//     )
+// };
+
+// const JiraDetail = (props)=>{
+//     var jiraDetail = props.jiraArr.map(function (jiraDetail) {
+//         return (
+//             <td className="commit-id">{jiraDetail.properties}</td>
+//         );
+//     });
+//     return (
+//         {jiraDetail}
+//     )
+// };
+
 
 class Dashboard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {value: 'ChooseYourEnvironment',
             checkComponents: [{name:"checkedA", status:false},{name:"checkedB", status: false},{name:"checkedC", status:false},{name:"checkedD",status:false}],
-            releaseOutputModels:[]
+            releaseOutputModels:{releaseOutputModels:[]}
         };
 
     }
@@ -74,13 +87,7 @@ class Dashboard extends React.Component {
         // unsubscribe to ensure no memory leaks
         this.subscription.unsubscribe();
     }
-    handleCheck(name,event){
-        for(let i=0;i<= this.state.checkComponents;i++){
-            if(name === this.state.checkComponents[i].name){
-                this.setState({ [name]: event.target.checked });
-            }
-        }
-    }
+
     deployChange(){
         //pass all the component names here
         async.parallel([
@@ -101,23 +108,21 @@ class Dashboard extends React.Component {
 
     render() {
 
-        var listItems = this.state.releaseOutputModels.map(function(component) {
+        var listItems = this.state.releaseOutputModels.releaseOutputModels.map(function(component) {
             return (
                 <tr>
-                    <td>{component.componentName}</td>
-                    <td>{component.prodDeployedState}</td>
+                    <td>{component.projectName}</td>
+                    <td>{component.deploymentOutputs.prodDeployedState}</td>
                     <td>
                         <ul>
-                            <li>release-1246</li>
-                            <li>release-1247</li>
-                            <li>release-1248</li>
+                            {component.deploymentOutputs.releaseNumbers.map(release => <li>{release}</li>)}
                         </ul>
                     </td>
-                    <td>{component.preProdDeploymentState}</td>
-                    <CommitData  commitArr={component.commitIds}/>
-                    <JiraDetail jiraArr={component.jiraDetails}/>
+                    <td>{component.deploymentOutputs.preProdDeploymentState}</td>
+                    {component.deploymentOutputs.commitIds.map(commitId => <td className="commit-id">{commitId}</td>)}
+                    {component.deploymentOutputs.jiraDetails.map(jiraDetail => jiraDetail.properties.jiraKey.map(story => <td className="commit-id">{story}</td>))}
                     <td>
-                     <CheckDeploy/>
+                     {/*<CheckDeploy />*/}
                     </td>
                 </tr>
             );
