@@ -6,72 +6,17 @@ import async from 'async';
 import axios from 'axios';
 
 
-
-class CheckDeploy extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state = {checkComponents: [
-            {name:"checkedA", status:false},
-                {name:"checkedB", status: false},
-                {name:"checkedC", status:false},
-                {name:"checkedD",status:false}]};
-
-    }
-    handleCheck(name,event){
-        for(let i=0;i<= this.state.checkComponents;i++){
-            if(name === this.state.checkComponents[i].name){
-                this.setState({ [name]: event.target.checked });
-            }
-        }
-    }
-    render() {
-        var checkboxStyle = {
-            opacity:"inherit",
-            pointerEvents:"all"
-        };
-        var checkComponents = this.state.checkComponents.map(item => <input type="checkbox" name={item.name} style={checkboxStyle} checked={item.status} onChange={e => this.handleCheck(item.name,e).bind(this)} value={item.name}/>);
-
-         return(
-             {checkComponents}
-         )
-
-    }
-}
-
-// const JiraDetail = (props)=>{
-//     var jiraDetail = props.jiraArr.map(function (jiraDetail) {
-//         return (
-//             <td className="commit-id">{jiraDetail.properties}</td>
-//         );
-//     });
-//     return (
-//         {jiraDetail}
-//     )
-// };
-
-// const JiraDetail = (props)=>{
-//     var jiraDetail = props.jiraArr.map(function (jiraDetail) {
-//         return (
-//             <td className="commit-id">{jiraDetail.properties}</td>
-//         );
-//     });
-//     return (
-//         {jiraDetail}
-//     )
-// };
-
-
 class Dashboard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {value: 'ChooseYourEnvironment',
-            checkComponents: [{name:"checkedA", status:false},{name:"checkedB", status: false},{name:"checkedC", status:false},{name:"checkedD",status:false}],
             releaseOutputModels:{releaseOutputModels:[]}
         };
 
     }
 
     componentDidMount() {
+
         this.subscription = messageService.getMessage().subscribe(result => {
             if (result) {
                 // add message to local state if not empty
@@ -90,6 +35,7 @@ class Dashboard extends React.Component {
 
     deployChange(){
         //pass all the component names here
+        console.log(this.state);
         async.parallel([
             function(callback) {
                 axios.get(`https://jsonplaceholder.typicode.com/todos/1`).then(res => callback(res));
@@ -108,7 +54,22 @@ class Dashboard extends React.Component {
 
     render() {
 
-        var listItems = this.state.releaseOutputModels.releaseOutputModels.map(function(component) {
+        var checkboxStyle = {
+            opacity:"inherit",
+            pointerEvents:"all"
+        };
+
+        var state = this.state;
+
+        var handleCheck = function(name,event){
+            for(let i=0;i< state.releaseOutputModels.releaseOutputModels.length;i++){
+                if(name === state.releaseOutputModels.releaseOutputModels[i].projectName){
+                    state.releaseOutputModels.releaseOutputModels[i].isChecked = !state.releaseOutputModels.releaseOutputModels[i].isChecked;
+                }
+            }
+        };
+
+        var listItems = this.state.releaseOutputModels.releaseOutputModels.map(function(component,index) {
             return (
                 <tr>
                     <td>{component.projectName}</td>
@@ -119,10 +80,21 @@ class Dashboard extends React.Component {
                         </ul>
                     </td>
                     <td>{component.deploymentOutputs.preProdDeploymentState}</td>
-                    {component.deploymentOutputs.commitIds.map(commitId => <td className="commit-id">{commitId}</td>)}
-                    {component.deploymentOutputs.jiraDetails.map(jiraDetail => jiraDetail.properties.jiraKey.map(story => <td className="commit-id">{story}</td>))}
+                    <td>
+                        <ul>
+                            {component.deploymentOutputs.commitIds.map(commitId => <li className="commit-id">{commitId}</li>)}
+
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            {component.deploymentOutputs.jiraDetails.map(jiraDetail => jiraDetail.properties.jiraKey.map(story => <li className="commit-id">{story}</li>))}
+
+                        </ul>
+                    </td>
                     <td>
                      {/*<CheckDeploy />*/}
+                        <input type="checkbox" name={component.projectName} style={checkboxStyle} checked={state[component.projectName]} onChange={e => handleCheck(component.projectName,e)} value={component.projectName+index}/>
                     </td>
                 </tr>
             );
