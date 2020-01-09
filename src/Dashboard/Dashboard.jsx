@@ -53,7 +53,7 @@ class Dashboard extends React.Component {
         super(props);
         this.state = {value: 'ChooseYourEnvironment',
             checkComponents: [{name:"checkedA", status:false},{name:"checkedB", status: false},{name:"checkedC", status:false},{name:"checkedD",status:false}],
-            components:[{"releaseOutputModels":[]}]
+            releaseOutputModels:[]
         };
 
     }
@@ -62,7 +62,7 @@ class Dashboard extends React.Component {
         this.subscription = messageService.getMessage().subscribe(result => {
             if (result) {
                 // add message to local state if not empty
-                this.setState({components: result.releaseOutputModels});
+                this.setState({releaseOutputModels: result.releaseOutputModels});
             } else {
                 // clear messages when empty message received
                 this.setState({components: []});
@@ -101,7 +101,7 @@ class Dashboard extends React.Component {
 
     render() {
 
-        var listItems = this.state.components[0].releaseOutputModels.map(function(component) {
+        var listItems = this.state.releaseOutputModels.map(function(component) {
             return (
                 <tr>
                     <td>{component.componentName}</td>
