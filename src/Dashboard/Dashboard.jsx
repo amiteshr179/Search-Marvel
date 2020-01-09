@@ -123,17 +123,8 @@ class Dashboard extends React.Component {
             );
         });
         return (
-            // <div className="container dashboard">
-            //     <h4 className="center-align"><b>One Click Deployment</b></h4>
-            //     <div className='row'>
-            //         <div className="select-env input-field col s4">
-            //         <Select value={this.state.value} onChange={this.handleChange.bind(this)}>
-            //         <option value="ChooseYourEnvironment" selected>Choose your Environment</option>
-            //         <option value="QA">QA</option>
-            //         <option value="Production">Production</option>
-            //         </Select>
-            //     </div>
-            //     </div>
+            <div className="container dashboard">
+                <h4 className="center-align"><b>One Click Deployment</b></h4>
             <section className=" card">
                     <table className="responsive-table striped">
                 <thead>
