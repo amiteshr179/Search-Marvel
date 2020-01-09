@@ -8,9 +8,6 @@ html{
 a { 
     cursor: pointer; 
 }
-.login-section{
-
-}
 .login-section .card{
     border-radius: 4px;
 }
@@ -24,7 +21,7 @@ border-radius: 4px;
 .login-right{
     background: #fff;
 }
-.center-section, .preloader-wrapper{
+.center-section, .loader-ani{
     position: absolute;
     top: 40%;
     left: 50%;
