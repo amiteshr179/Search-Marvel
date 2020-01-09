@@ -5,48 +5,61 @@ import Select from "@material-ui/core/Select";
 import async from 'async';
 import axios from 'axios';
 
-var checkboxStyle = {
-    opacity:"inherit",
-    pointerEvents:"all"
-};
 
 
-const CheckDeploy = ()=>{
-    var checkArr = this.state.checkComponents.map(function (item) {
-        return (
-            <input type="checkbox" name={item.name} style={checkboxStyle}
-                   checked={item.status} onChange={e => this.handleCheck(item.name,e).bind(this)} value={item.name}
-            />
-        )
-    });
-return(
-    {checkArr}
-)
-};
+class CheckDeploy extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {checkComponents: [
+            {name:"checkedA", status:false},
+                {name:"checkedB", status: false},
+                {name:"checkedC", status:false},
+                {name:"checkedD",status:false}]};
 
-const JiraDetail = (props)=>{
-    var jiraDetail = props.jiraArr.map(function (jiraDetail) {
-        return (
-            <td className="commit-id">{jiraDetail.properties}</td>
-        );
-    });
-    return (
-        {jiraDetail}
-    )
-};
+    }
+    handleCheck(name,event){
+        for(let i=0;i<= this.state.checkComponents;i++){
+            if(name === this.state.checkComponents[i].name){
+                this.setState({ [name]: event.target.checked });
+            }
+        }
+    }
+    render() {
+        var checkboxStyle = {
+            opacity:"inherit",
+            pointerEvents:"all"
+        };
+        var checkComponents = this.state.checkComponents.map(item => <input type="checkbox" name={item.name} style={checkboxStyle} checked={item.status} onChange={e => this.handleCheck(item.name,e).bind(this)} value={item.name}/>);
 
+         return(
+             {checkComponents}
+         )
 
-const CommitData = (props) => {
-    var dataItems = props.commitArr.map(function (commitId) {
-        return (
-            <td className="commit-id">{commitId}</td>
-        );
-    });
+    }
+}
 
-    return (
-        {dataItems}
-    );
-};
+// const JiraDetail = (props)=>{
+//     var jiraDetail = props.jiraArr.map(function (jiraDetail) {
+//         return (
+//             <td className="commit-id">{jiraDetail.properties}</td>
+//         );
+//     });
+//     return (
+//         {jiraDetail}
+//     )
+// };
+
+// const JiraDetail = (props)=>{
+//     var jiraDetail = props.jiraArr.map(function (jiraDetail) {
+//         return (
+//             <td className="commit-id">{jiraDetail.properties}</td>
+//         );
+//     });
+//     return (
+//         {jiraDetail}
+//     )
+// };
+
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -74,13 +87,7 @@ class Dashboard extends React.Component {
         // unsubscribe to ensure no memory leaks
         this.subscription.unsubscribe();
     }
-    handleCheck(name,event){
-        for(let i=0;i<= this.state.checkComponents;i++){
-            if(name === this.state.checkComponents[i].name){
-                this.setState({ [name]: event.target.checked });
-            }
-        }
-    }
+
     deployChange(){
         //pass all the component names here
         async.parallel([
@@ -108,16 +115,13 @@ class Dashboard extends React.Component {
                     <td>{component.deploymentOutputs.prodDeployedState}</td>
                     <td>
                         <ul>
-                            <li>release-1246</li>
-                            <li>release-1247</li>
-                            <li>release-1248</li>
+                            {component.deploymentOutputs.releaseNumbers.map(release => <li>{release}</li>)}
                         </ul>
                     </td>
                     <td>{component.deploymentOutputs.preProdDeploymentState}</td>
-                    <CommitData  commitArr={component.deploymentOutputs.commitIds}/>
-                    <JiraDetail jiraArr={component.deploymentOutputs.jiraDetails}/>
+                    {component.deploymentOutputs.commitIds.map(commitId => <td className="commit-id">{commitId}</td>)}
                     <td>
-                     <CheckDeploy/>
+                     {/*<CheckDeploy />*/}
                     </td>
                 </tr>
             );
