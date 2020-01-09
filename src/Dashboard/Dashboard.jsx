@@ -53,7 +53,7 @@ class Dashboard extends React.Component {
         super(props);
         this.state = {value: 'ChooseYourEnvironment',
             checkComponents: [{name:"checkedA", status:false},{name:"checkedB", status: false},{name:"checkedC", status:false},{name:"checkedD",status:false}],
-            components:[]
+            components:[releaseOutputModels:[]]
         };
 
     }
@@ -104,7 +104,7 @@ class Dashboard extends React.Component {
 
     render() {
 
-        var listItems = this.state.components.map(function(component) {
+        var listItems = this.state.components.releaseOutputModels.map(function(component) {
             return (
                 <tr>
                     <td>{component.componentName}</td>
