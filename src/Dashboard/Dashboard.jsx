@@ -24,8 +24,8 @@ return(
 )
 };
 
-const JiraDetail = (jiraArr)=>{
-    var jiraDetail = jiraArr.map(function (jiraDetail) {
+const JiraDetail = (props)=>{
+    var jiraDetail = props.jiraArr.map(function (jiraDetail) {
         return (
             <td className="commit-id">{jiraDetail.properties}</td>
         );
@@ -36,8 +36,8 @@ const JiraDetail = (jiraArr)=>{
 };
 
 
-const CommitData = (commitArr) => {
-    var dataItems = commitArr.map(function (commitId) {
+const CommitData = (props) => {
+    var dataItems = props.commitArr.map(function (commitId) {
         return (
             <td className="commit-id">{commitId}</td>
         );
@@ -53,7 +53,7 @@ class Dashboard extends React.Component {
         super(props);
         this.state = {value: 'ChooseYourEnvironment',
             checkComponents: [{name:"checkedA", status:false},{name:"checkedB", status: false},{name:"checkedC", status:false},{name:"checkedD",status:false}],
-            releaseOutputModels:[]
+            releaseOutputModels:{releaseOutputModels:[]}
         };
 
     }
@@ -101,11 +101,11 @@ class Dashboard extends React.Component {
 
     render() {
 
-        var listItems = this.state.releaseOutputModels.map(function(component) {
+        var listItems = this.state.releaseOutputModels.releaseOutputModels.map(function(component) {
             return (
                 <tr>
-                    <td>{component.componentName}</td>
-                    <td>{component.prodDeployedState}</td>
+                    <td>{component.projectName}</td>
+                    <td>{component.deploymentOutputs.prodDeployedState}</td>
                     <td>
                         <ul>
                             <li>release-1246</li>
@@ -113,9 +113,9 @@ class Dashboard extends React.Component {
                             <li>release-1248</li>
                         </ul>
                     </td>
-                    <td>{component.preProdDeploymentState}</td>
-                    <CommitData  commitArr={component.commitIds}/>
-                    <JiraDetail jiraArr={component.jiraDetails}/>
+                    <td>{component.deploymentOutputs.preProdDeploymentState}</td>
+                    <CommitData  commitArr={component.deploymentOutputs.commitIds}/>
+                    <JiraDetail jiraArr={component.deploymentOutputs.jiraDetails}/>
                     <td>
                      <CheckDeploy/>
                     </td>
