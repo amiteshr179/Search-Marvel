@@ -120,6 +120,7 @@ class Dashboard extends React.Component {
                     </td>
                     <td>{component.deploymentOutputs.preProdDeploymentState}</td>
                     {component.deploymentOutputs.commitIds.map(commitId => <td className="commit-id">{commitId}</td>)}
+                    {component.deploymentOutputs.jiraDetails.map(jiraDetail => <td className="commit-id">{jiraDetail}</td>)}
                     <td>
                      {/*<CheckDeploy />*/}
                     </td>
