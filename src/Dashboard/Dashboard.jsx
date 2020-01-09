@@ -147,6 +147,20 @@ class Dashboard extends React.Component {
               <a className="waves-effect waves-light btn" onClick={this.deployChange.bind(this)}><b>Deploy</b></a>
               </div>
             </section>
+
+            <div className="card more-actions">
+            <div className="card-action">
+                <div className="row">
+                    <div className="col m6 s12">
+                    <h5>More Actions</h5>
+                    </div>
+                    <div className="col m6 s12 right-align">
+                    <a className="waves-effect waves-light btn inte-btn teal lighten-1"><b>Run Integration Tests</b></a>
+                    <a className="waves-effect waves-light btn email-report-btn teal lighten-1"><b>Email Reports</b></a>
+                    </div>
+                </div>
+              </div>
+            </div>
             </div>
         );
     }
