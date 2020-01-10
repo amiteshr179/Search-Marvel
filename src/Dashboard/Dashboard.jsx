@@ -96,7 +96,7 @@ class Dashboard extends React.Component {
                     </td>
                     <td>
                         <ul>
-                            {component.deploymentOutputs.jiraDetails.map(jiraDetail => jiraDetail.properties.jiraKey.map(story => <li className="commit-id">{story}</li>))}
+                            <li className="commit-id">{component.deploymentOutputs.jiraDetails.map(jiraDetail => jiraDetail.properties.jiraKey.map(story => <span>{story}</span>))} -- {component.deploymentOutputs.jiraDetails.map(jiraDetail => <span className="commit-id">{jiraDetail.author.displayName}</span>)}</li>
 
                         </ul>
                     </td>
