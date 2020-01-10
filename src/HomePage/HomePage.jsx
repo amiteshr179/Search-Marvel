@@ -19,7 +19,7 @@ class HomePage extends React.Component {
 
     render() {
         return (
-            <div class="login-section">
+            <div className="login-section">
             <section className="center-section login">
             
             <div className="card">

@@ -36,10 +36,8 @@ class Dashboard extends React.Component {
 
     deployChange() {
         //pass all the component names here
-        console.log(this.state);
         this.setState({deployStatus:false});
         setTimeout(function (self) {
-            console.log(self);
             self.setState({deployStatus:true});
         },3000,this);
         var reqArr = [];
@@ -112,8 +110,21 @@ class Dashboard extends React.Component {
         return (
             <div className="container dashboard">
                 <h4 className="center-align"><b>One Click Deployment</b></h4>
+
+                <div className="row product-select">
+                    <div className="col m3 s12">
+                    <div className="input-field">
+                    <select className="product-select">
+                    <option value="1" selected>Connected Store</option>
+                    <option value="2">Quote Services</option>
+                    </select>
+                    <label><b>Select Product</b></label>
+                </div>
+                    </div>
+                </div>
+
             <section className=" card">
-                    <table className="responsive-table striped">
+                    <table className="responsive-table striped deploy-dash">
                 <thead>
                 <tr>
                     <th>Component</th>
