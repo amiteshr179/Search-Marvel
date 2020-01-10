@@ -10,7 +10,8 @@ class Dashboard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {value: 'ChooseYourEnvironment',
-            releaseOutputModels:{releaseOutputModels:[]}
+            releaseOutputModels:{releaseOutputModels:[]},
+            deployStatus:false
         };
 
     }
@@ -36,6 +37,9 @@ class Dashboard extends React.Component {
     deployChange() {
         //pass all the component names here
         console.log(this.state);
+        setTimeout(function () {
+            this.state.deployStatus = true;
+        },3000);
         var reqArr = [];
         for (let i = 0; i < this.state.releaseOutputModels.releaseOutputModels.length; i++) {
             if (this.state.releaseOutputModels.releaseOutputModels[i].isChecked === true) {
