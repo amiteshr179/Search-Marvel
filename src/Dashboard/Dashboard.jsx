@@ -11,7 +11,7 @@ class Dashboard extends React.Component {
         super(props);
         this.state = {value: 'ChooseYourEnvironment',
             releaseOutputModels:{releaseOutputModels:[]},
-            deployStatus:false
+            deployStatus:""
         };
 
     }
@@ -37,9 +37,11 @@ class Dashboard extends React.Component {
     deployChange() {
         //pass all the component names here
         console.log(this.state);
-        setTimeout(function () {
-            this.state.deployStatus = true;
-        },3000);
+        this.setState({deployStatus:false});
+        setTimeout(function (self) {
+            console.log(self);
+            self.setState({deployStatus:true});
+        },3000,this);
         var reqArr = [];
         for (let i = 0; i < this.state.releaseOutputModels.releaseOutputModels.length; i++) {
             if (this.state.releaseOutputModels.releaseOutputModels[i].isChecked === true) {
@@ -56,7 +58,7 @@ class Dashboard extends React.Component {
             }
         }
 
-        axios.post('http://localhost:5001/api/utility/release/StartDeployment', reqArr)
+        axios.post('https://api-int.dit.connectcdk.com/api/dm-cdk-cnst-utility-assets/v1/api/utility/release/StartDeployment', reqArr)
             .then(response => console.log(response));
         }
 
@@ -128,9 +130,9 @@ class Dashboard extends React.Component {
                 {listItems}
                 </tbody>
             </table>
-            <div className="card-action right-align">
-              <a className="waves-effect waves-light btn" onClick={this.deployChange.bind(this)}><b>Deploy</b></a>
-              </div>
+            <div className="card-action center-align">
+                {this.state.deployStatus === ""? <div className="right-align"> <a className="waves-effect waves-light btn" onClick={this.deployChange.bind(this)}><b>Deploy</b></a></div>: this.state.deployStatus === false ? <div className="preloader-wrapper small active"><div className="spinner-layer spinner-green-only"></div><div className="circle-clipper left"><div className="circle"></div></div><div className="gap-patch"><div className="circle"></div></div><div className="circle-clipper right"><div className="circle"></div></div></div> :  <div className="right-align"> <a className="waves-effect waves-light btn"><b>Deployed</b></a></div>}
+            </div>
             </section>
 
             <div className="card more-actions">

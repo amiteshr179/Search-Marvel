@@ -14,7 +14,7 @@ class Loader extends React.Component{
     componentDidMount() {
         //fetch('https://jsonplaceholder.typicode.com/todos/1')
 
-        axios.post('http://localhost:5001/api/utility/release/ReleaseDetails',{username:this.props.location.aboutProps.username, password:this.props.location.aboutProps.password})
+        axios.post('https://api-int.dit.connectcdk.com/api/dm-cdk-cnst-utility-assets/v1/api/utility/release/ReleaseDetails',{username:this.props.location.aboutProps.username, password:this.props.location.aboutProps.password})
             .then(response => {
             console.log(response);
                 this.setState({isLoaded: false});
