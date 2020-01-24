@@ -26,7 +26,6 @@ module.exports = {
         template: './src/index.html'
     }),
         new ZipPlugin({
-            path: 'zip',
             filename: 'cdk_one_click_deployment.zip'})],
     devServer: {
         historyApiFallback: true
