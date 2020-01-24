@@ -1,4 +1,5 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var ZipPlugin = require('zip-webpack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -20,9 +21,13 @@ module.exports = {
             '@': path.resolve(__dirname, 'src/'),
         }
     },
-    plugins: [new HtmlWebpackPlugin({
+    plugins: [
+        new HtmlWebpackPlugin({
         template: './src/index.html'
-    })],
+    }),
+        new ZipPlugin({
+            path: 'zip',
+            filename: 'cdk_one_click_deployment.zip'})],
     devServer: {
         historyApiFallback: true
     },
