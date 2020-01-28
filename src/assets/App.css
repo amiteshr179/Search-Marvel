@@ -1,6 +1,6 @@
 html{
     min-height: 100%;
-    background: url('/assets/Header_BG.png') no-repeat;
+    background: url('Header_BG.png') no-repeat;
     width: 100%;
     height:auto;
     background-size: cover;

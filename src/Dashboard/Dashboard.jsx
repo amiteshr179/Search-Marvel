@@ -1,8 +1,5 @@
 import React from 'react';
-import Checkbox from '@material-ui/core/Checkbox';
 import {messageService} from "../_services";
-import Select from "@material-ui/core/Select";
-import async from 'async';
 import axios from 'axios';
 
 

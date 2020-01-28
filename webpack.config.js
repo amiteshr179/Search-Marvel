@@ -1,18 +1,36 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ZipPlugin = require('zip-webpack-plugin');
+const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin");
 const path = require('path');
 
 module.exports = {
     mode: 'development',
-    resolve: {
-        extensions: ['.js', '.jsx']
+    entry: "./src/index.jsx",
+
+    output: {
+        filename: "[name].js",
+        path: path.resolve(path.join(__dirname, "./dist")),
     },
     module: {
         rules: [
             {
                 test: /\.jsx?$/,
                 loader: 'babel-loader'
-            }
+            },
+            {
+                test: /\.css$/,
+                use: ExtractTextWebpackPlugin.extract({
+                    use: "css-loader",
+                })
+            },
+            {
+                test: /\.(png|svg|jpg|gif)$/,
+                use: [
+                         {
+                            loader: 'file-loader'
+                            }
+             ]
+      }
         ]
     },
     resolve: {
@@ -22,11 +40,13 @@ module.exports = {
         }
     },
     plugins: [
+        new ExtractTextWebpackPlugin("App.css"),
         new HtmlWebpackPlugin({
         template: './src/index.html'
     }),
         new ZipPlugin({
-            filename: 'cdk_one_click_deployment.zip'})],
+            filename: 'cdk_one_click_deployment.zip'}),
+        ],
     devServer: {
         historyApiFallback: true
     },
