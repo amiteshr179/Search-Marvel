@@ -26,11 +26,11 @@ module.exports = {
             {
                 test: /\.(png|svg|jpg|gif)$/,
                 use: [
-                         {
-                            loader: 'file-loader'
-                            }
-             ]
-      }
+                    {
+                        loader: 'file-loader'
+                    }
+                ]
+            }
         ]
     },
     resolve: {
@@ -42,17 +42,17 @@ module.exports = {
     plugins: [
         new ExtractTextWebpackPlugin("App.css"),
         new HtmlWebpackPlugin({
-        template: './src/index.html'
-    }),
+            template: './src/index.html'
+        }),
         new ZipPlugin({
             filename: 'cdk_one_click_deployment.zip'}),
-        ],
+    ],
     devServer: {
         historyApiFallback: true
     },
     optimization: {
-         splitChunks: {
-             chunks: 'all',
-            },
-         },
+        splitChunks: {
+            chunks: 'all',
+        },
+    },
 };
