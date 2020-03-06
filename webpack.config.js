@@ -1,5 +1,5 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ZipPlugin = require('zip-webpack-plugin');
+// var ZipPlugin = require('zip-webpack-plugin');
 const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin");
 const path = require('path');
 
@@ -49,8 +49,10 @@ module.exports = {
         historyApiFallback: true
     },
     optimization: {
-        splitChunks: {
-            chunks: 'all',
-        },
     },
+    performance: {
+        hints: false,
+        maxEntrypointSize: 512000,
+        maxAssetSize: 512000
+    }
 };
