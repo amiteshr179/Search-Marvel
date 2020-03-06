@@ -44,8 +44,6 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './src/index.html'
         }),
-        new ZipPlugin({
-            filename: 'cdk_one_click_deployment.zip'}),
     ],
     devServer: {
         historyApiFallback: true
