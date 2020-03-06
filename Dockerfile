@@ -6,8 +6,8 @@ RUN rm -v /etc/nginx/nginx.conf
 # Copy a configuration file from the current directory
 ADD nginx.conf /etc/nginx/
 
-ADD web /usr/share/nginx/html/
-ADD web /var/www/html/
+ADD dist /usr/share/nginx/html/
+ADD dist /var/www/html/
 
 # Expose ports
 EXPOSE 90
