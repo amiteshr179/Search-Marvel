@@ -10,10 +10,10 @@ import StoriesList from "@/Stories/StoriesList";
 function GenerateList(props) {
     return (
         <div>
-            <ComicsList stats={props.comics} />
-            <SeriesList stats={props.series} />
-            <EventsList stats={props.events} />
-            <StoriesList stats={props.stories} />
+            {props.comics.length >0 ?<ComicsList stats={props.comics} /> : <p>No comics available for your search</p>}
+            {props.series.length >0 ?<SeriesList stats={props.series} /> : <p>No series available for your search</p>}
+            {props.events.length >0 ?<EventsList stats={props.events} /> : <p>No events available for your search</p>}
+            {props.stories.length >0 ?<StoriesList stats={props.stories} /> : <p>No stories available for your search</p>}
         </div>
     );
 }
