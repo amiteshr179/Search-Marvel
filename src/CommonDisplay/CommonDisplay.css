@@ -1,0 +1,39 @@
+.genre{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #141E30;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    border-radius: 10px;
+    transition: all 1s ease-in-out;
+    cursor: pointer;
+}
+.error{
+    color: red;
+}
+.genre:hover{
+    transform: scale(1.1);
+}
+.genre > img{
+    width: 33%;
+    height: auto;
+}
+.genre > h2{
+    margin: 5px 0;
+}
+.describe{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-gap: 1rem;
+    justify-items: center;
+    width: 95%;
+}
+.list{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 1rem;
+    width: 100%;
+}

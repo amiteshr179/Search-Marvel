@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Search Component</title>
+    <title>One Click Deployment</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
         <!-- Compiled and minified JavaScript -->
@@ -12,6 +12,12 @@
 
 
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+    <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('select');
+            var instances = M.FormSelect.init(elems);
+        });
+  </script>
 
     <style>
  
@@ -21,5 +27,5 @@
     <div id="app"></div>
         </p>
     </div>
-</body>
+<script type="text/javascript" src="main.js"></script></body>
 </html>
