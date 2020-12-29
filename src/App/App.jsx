@@ -34,10 +34,12 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.prevProcessQueue = [];
+        this.latestSearches=[];
         this.state = {
             searchResults: [],
             searchField: "Adam",
-            error: ""
+            error: "",
+            latestFiveSearches:[]
         }
     }
     componentDidUpdate(prevProps,prevstate){
@@ -47,6 +49,12 @@ class App extends React.Component {
             const ts = Number(new Date());
             const hash = md5.create();
             const searchField = this.state.searchField;
+            const latestSearches =[];
+            if(this.latestSearches.length>4){
+                this.latestSearches.shift();
+            }
+            this.latestSearches.push(this.state.searchField);
+            this.setState({latestFiveSearches: latestSearches});
             hash.update(ts + PRIVATE_KEY + PUBLIC_KEY);
             hash.hex()
 
